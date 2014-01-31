@@ -1,0 +1,26 @@
+{
+  "name": "custom-widget",
+  "description": "Customize Widgets!",
+  "version": "0.1.0",
+  "homepage": "https://github.com/matstars/custom-widget",
+  "author": {
+    "name": "matstars"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:matstars/custom-widget.git"
+  },
+  "bugs": {
+    "url": "https://github.com/matstars/custom-widget/issues"
+  },
+  
+  "main": "Gruntfile.js",
+  "devDependencies": {
+    "grunt-contrib-watch": "latest",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-cssmin": "~0.6.1",
+    "grunt-contrib-sass": "~0.6.0",
+    "grunt": "~0.4.1"
+  }
+}

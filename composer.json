@@ -1,0 +1,16 @@
+{
+    "name": "mgargano/custom-widget",
+    "description": "Custom widgets!",
+    "keywords": ["wordpress", "widget"],
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Mat Gargano",
+            "email": "mgargano@gmail.com"
+        }
+    ],
+    "type": "library",
+    "autoload": {
+        "files": ["custom-widget.php"]
+    }
+}

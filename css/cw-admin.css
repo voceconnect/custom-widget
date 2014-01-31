@@ -1,0 +1,36 @@
+.cw-form .cw-inner-form {
+  border: 1px solid #e5e5e5;
+  background: #fafafa;
+  padding: 5px; }
+  .cw-form .cw-inner-form .cw-remove-image {
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px; }
+    .cw-form .cw-inner-form .cw-remove-image:hover {
+      color: red; }
+.cw-form .cw-remove-image {
+  display: none; }
+.cw-form .image-preview img {
+  max-width: 100%;
+  cursor: pointer; }
+.cw-form .cw-error {
+  color: red;
+  font-weight: bold; }
+
+.cw-items {
+  margin-top: 16px; }
+  .cw-items > div {
+    padding: .5em;
+    border: 1px solid #e5e5e5;
+    background: #fafafa;
+    margin-bottom: .5em; }
+    .cw-items > div .options {
+      font-size: 10px;
+      float: right; }
+      .cw-items > div .options span {
+        cursor: pointer; }
+        .cw-items > div .options span:hover {
+          color: red; }

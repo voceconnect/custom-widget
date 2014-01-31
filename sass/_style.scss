@@ -1,0 +1,52 @@
+.cw-form {
+    .cw-inner-form {
+        border:1px solid $borderColor;
+        background:$backgroundColor;
+        padding:5px;
+        .cw-remove-image {
+            font-size:12px;
+            cursor:pointer;
+            font-weight:bold;
+            text-align:center;
+            margin-top:10px;
+            margin-bottom:10px;
+            &:hover {
+                color:$red;
+            }
+        }
+        
+    }
+    .cw-remove-image {
+        display:none;
+    }
+    .image-preview {
+        img {
+            max-width:100%;
+            cursor:pointer;
+        }
+    }
+    .cw-error {
+        color:$red;
+        font-weight:bold;
+    }
+}
+
+.cw-items {
+    margin-top:16px;
+    > div {
+        padding:.5em;
+        border:1px solid $borderColor;
+        background:$backgroundColor;
+        margin-bottom:.5em;
+        .options {
+            font-size:10px;
+            float:right;
+            span {
+                cursor:pointer;
+                &:hover {
+                    color:$red;
+                }
+            }
+        }
+    }
+}
