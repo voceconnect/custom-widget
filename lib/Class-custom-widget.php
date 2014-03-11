@@ -21,7 +21,7 @@ class Custom_widget extends WP_Widget {
         parent::__construct(
             'custom_widget', // Base ID
             'Custom Widget', // Name
-            array( 'description' => __( 'Custom widgets!', self::$text_domain ), ) // Args
+            array( 'description' => __( 'Custom, curated widget', self::$text_domain ), ) // Args
         );
     }
 
@@ -62,7 +62,11 @@ class Custom_widget extends WP_Widget {
     public function update( $new_instance, $old_instance ) {
         $instance = array();
         $instance['title'] = esc_attr( $new_instance['title'] );
-        $instance['widget-data'] = esc_attr( $new_instance['widget-data'] );
+        $instance['cta_url'] = esc_url( $new_instance['cta_url'] );
+        $instance['cta_text'] = esc_attr( $new_instance['cta_text'] );
+        $instance['text'] = esc_attr( $new_instance['text'] );
+        $instance['attachment_id'] = esc_attr( $new_instance['attachment_id'] );
+        
         
         return $instance;
     }
@@ -76,12 +80,17 @@ class Custom_widget extends WP_Widget {
      */
     public function form( $instance ) {
         $defaults = array(
-            'widget-data' => '',
-            'title' => ''
+            'cta_url' => '',
+            'cta_text' => '',
+            'text' => '',
+            'title' => '',
+            'attachment_id',
         );
-        $instance = wp_parse_args( (array) $instance, $defaults );     
-        if ( !isset( $instance[ 'title' ] ) ) {
-            $instance['title'] = __( 'Posts', self::$text_domain );
+        
+        $attachment_id  = $instance['attachment_id'];
+        $image = '<img>';
+        if ( is_numeric( $attachment_id ) ) {
+            $image = '<img src="' . wp_get_attachment_image_src( $attachment_id, 'full' )[0] . '">';
         }
         ?>
         <div class="cw-form">
@@ -89,28 +98,22 @@ class Custom_widget extends WP_Widget {
                 <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', self::$text_domain ); ?></label> 
                 <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $instance['title']; ?>" />
             </p>
-            <div class="cw-inner-form">
-                <strong>Add new custom block</strong>
+            
                 <p class="cw-error"></p>
                 <p>
-                    <label for="cw-instance-title cw-innerform-text"><?php _e( 'Instance title:', self::$text_domain ); ?></label>
-                    <input class="widefat cw-instance-title" name="search" type="text" placeholder="" />
+                    <label for="<?php echo $this->get_field_id( 'cta_url' ); ?>"><?php _e( 'URL:', self::$text_domain ); ?></label> 
+                    <input class="widefat" id="<?php echo $this->get_field_id( 'cta_url' ); ?>" name="<?php echo $this->get_field_name( 'cta_url' ); ?>" type="text" value="<?php echo $instance['cta_url']; ?>" />
                 </p>
+               <p>
+                    <label for="<?php echo $this->get_field_id( 'text' ); ?>"><?php _e( 'Text:', self::$text_domain ); ?></label> 
+                    <textarea class="widefat" id="<?php echo $this->get_field_id( 'text' ); ?>" name="<?php echo $this->get_field_name( 'text' ); ?>" type="text"><?php echo $instance['text']; ?></textarea>
+                </p>                                
+                <div class="image-preview"><?php echo $image; ?></div>
+                <input class="cw-image" id="<?php echo $this->get_field_id( 'attachment_id' ); ?>" name="<?php echo $this->get_field_name( 'attachment_id' ); ?>" type="hidden" value="<?php echo $instance['attachment_id']; ?>" />
                 <p>
-                    <label for="cw-instance-url cw-innerform-text"><?php _e( 'Instance URL:', self::$text_domain ); ?></label>
-                    <input class="widefat cw-instance-url" name="search" type="text" placeholder="" />
-                </p>                
-                <div class="image-preview"></div>
-                <div class="cw-remove-image">[remove Image]</div>
-                <p>
-                    <span data-uploader-button-text="Attach to this Custom Widget Instance" data-uploader-title="Select the image for the custom widget" class="button-secondary cw-attach-image">Attach image</span>
-                    <span class="cw-add-instance button-secondary">Add instance</span>
+                    <span data-uploader-button-text="Attach to this widget" data-uploader-title="Select the image for the custom widget" class="button-secondary cw-attach-image">Attach image</span>
                 </p>
-                <input type="hidden" class="cw-current-data">
-
-            </div>
-            <input class="widefat cw-widget-data" id="<?php echo $this->get_field_id( 'widget-data' ); ?>" name="<?php echo $this->get_field_name( 'widget-data' ); ?>" type="hidden" value="<?php echo $instance['widget-data']; ?>" />
-            <div class="cw-items"></div>
+                
         </div>
 
         
