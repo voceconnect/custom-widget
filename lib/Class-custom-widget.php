@@ -37,8 +37,9 @@ class Custom_widget extends WP_Widget {
      * @param array $instance Saved values from database.
      */
     public function widget( $args, $instance ) {
-        
-        $template_file = apply_filters( 'cw_template', plugin_dir_path( dirname( __FILE__ ) ) . 'views/widget.php' );
+        $template_file = plugin_dir_path( dirname( __FILE__ ) ) . 'views/widget.php';
+        $template_file = apply_filters( 'cw_template', $template_file );
+        $template_file = apply_filters( 'cw_' . $this->id . '_template', $template_file );
         
         $title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
         $cta_url = $instance['cta_url'];
@@ -128,6 +129,14 @@ class Custom_widget extends WP_Widget {
                 </p>
                 
         </div>
+        <?php $this_id = $this->id; ?>
+            <?php if ( strpos( $this_id, '_i_') === false ) { ?>
+                <hr>
+                <p>
+                    <strong>Widget name (for templating): </strong> <?php echo $this->id; ?>
+                </p>
+            <?php } ?>
+
 
         
         <?php
