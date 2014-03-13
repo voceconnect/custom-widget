@@ -9,7 +9,7 @@
             "email": "mgargano@gmail.com"
         }
     ],
-    "type": "library",
+    "type": "wordpress-plugin",
     "autoload": {
         "files": ["custom-widget.php"]
     }
