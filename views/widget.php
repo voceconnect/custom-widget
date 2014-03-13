@@ -4,10 +4,10 @@ if ( $title ) {
 }
 ?>
 <ul>
-    <?php while ( $posts->have_posts() ) : $posts->the_post(); ?>
-        <li>
-            <a href="<?php the_permalink(); ?>"><?php get_the_title() ? the_title() : the_ID(); ?></a>
-        </li>
-    <?php endwhile; ?>
+	<li>
+		<?php echo wp_get_attachment_image( $attachment_id, 'full' ); ?>
+		<?php echo wpautop($text); ?>
+		<a href="<?php echo $cta_url; ?>"><?php echo $cta_text; ?></a>
+	</li>    
+
 </ul>
-<?php wp_reset_postdata(); ?>

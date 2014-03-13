@@ -9,7 +9,7 @@ module.exports = function(grunt) {
 
     // Lint JavaScript
     jshint: {
-      all: ['javascripts/cw-admin.js'],
+      all: ['js/cw-admin.js'],
        options:{
         "forin": true,
         "noarg": true,
@@ -29,9 +29,9 @@ module.exports = function(grunt) {
                 preserveComments: "some"
             },
             files: {
-                "javascripts/cw-admin.min.js": [
-                    "javascripts/*.js",
-                    "!javascripts/*.min.js",
+                "js/cw-admin.min.js": [
+                    "js/*.js",
+                    "!js/*.min.js",
                 ],
             }
         }
@@ -64,7 +64,7 @@ module.exports = function(grunt) {
     },
     watch: {
       js: {
-        files: ['javascripts/*.js'],
+        files: ['js/*.js'],
         tasks: ['jshint', 'uglify'],
         options: {
           livereload: true,
