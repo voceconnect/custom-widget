@@ -3,8 +3,8 @@
 Plugin Name: Custom Widget
 Description: Custom widgets!
 Version: 0.1.0
-Author: Mat Gargano
-Author URI: http://www.matgargano.com
+Author: matstars
+Author URI: http://vocecplatforms.com
 */
 
 require_once('lib/Class-custom-widget.php');

@@ -1,11 +1,12 @@
 === Custom Widget ===
-Contributors: matstrs
-Tags: post, widget
-Requires at least: 3.6
-Tested up to: 3.8
-Stable tag: 0.1.0
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Contributors: matstars, voceplatforms  
+Tags: post, widget  
+Tested up to: 3.8.1  
+Requires at least: 3.5  
+Stable tag: 0.1.0  
+License: GPLv2 or later  
+License URI: http://www.gnu.org/licenses/gpl-2.0.html  
+
 
 Customize Widgets!
 

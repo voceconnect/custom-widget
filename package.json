@@ -2,16 +2,16 @@
   "name": "custom-widget",
   "description": "Customize Widgets!",
   "version": "0.1.0",
-  "homepage": "https://github.com/matstars/custom-widget",
+  "homepage": "https://github.com/voceconnect/custom-widget",
   "author": {
-    "name": "matstars"
+    "name": "Mat Gargano <mat@voceconnect.com>"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:matstars/custom-widget.git"
+    "url": "git@github.com:voceconnect/custom-widget.git"
   },
   "bugs": {
-    "url": "https://github.com/matstars/custom-widget/issues"
+    "url": "https://github.com/voceconnect/custom-widget/issues"
   },
   
   "main": "Gruntfile.js",
