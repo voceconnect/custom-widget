@@ -1,7 +1,7 @@
 {
   "name": "custom-widget",
   "description": "Customize Widgets!",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/voceconnect/custom-widget",
   "author": {
     "name": "Mat Gargano <mat@voceconnect.com>"

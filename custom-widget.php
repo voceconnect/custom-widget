@@ -2,7 +2,7 @@
 /*
 Plugin Name: Custom Widget
 Description: Custom widgets!
-Version: 0.1.0
+Version: 0.1.1
 Author: matstars
 Author URI: http://vocecplatforms.com
 */
