@@ -69,4 +69,4 @@ add_filter( 'cw_custom_widget-3_template', function ( $template ){
 * Incremental bugfixes
 
 **0.1.0**  
-*Initial release
+* Initial release
