@@ -1,6 +1,6 @@
 {
     "name": "voceconnect/custom-widget",
-    "description": "Custom widgets!",
+    "description": "Customized widget that has inputs for a title, a CTA text and link, textarea and image with a template that can easily be customized using filters.",
     "keywords": ["wordpress", "widget"],
     "license": "GPL-3.0+",
     "authors": [

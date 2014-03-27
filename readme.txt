@@ -2,25 +2,25 @@
 Contributors: matstars, voceplatforms  
 Tags: post, widget  
 Tested up to: 3.8.1  
-Requires at least: 3.5  
+Requires at least: 3.6  
 Stable tag: 0.1.1  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
 
-Customize Widgets!
-
+Customized widget that has inputs for a title, a CTA text and link, textarea and image.
 
 == Description ==
 
-Customize Widgets!
+Provides a widget that allows you to output a title, a call to action (CTA) text with a link, textarea and an image. It comes with a prebuilt template, but you can easily extend it using filters and add your own template on a global basis and/or a per-widget basis.
+
 
 
 ## Usage of cw_template filter
 
-Add a "views" directory and file named "custom-cw.php" to your template directory. The "custom-cw.php" file will be your custom template for this example.
+Add a template directory and file named "custom-cw.php" to your template directory. The "custom-cw.php" file will be your custom template for this example, see below.
 
-#### Example of using a custom template from within your theme pre-PHP 5.3
+#### Example of using a custom template to globally override all instances of Custom Widget from within your theme pre-PHP 5.3:
 
 
 
@@ -34,12 +34,23 @@ Add a "views" directory and file named "custom-cw.php" to your template director
 ?>`
 
 
-#### Example of using a custom template from within your theme PHP 5.3+ which allows anonymous functions
+#### Example of using a custom template to globally override all instances of Custom Widget from within your theme using PHP 5.3+ which allows anonymous functions:
 
 `<?php
     add_filter( 'cw_template', function( $template ){
         $template_dir = get_template_directory();
         return $template_dir . '/views/custom-cw.php';
+    });
+?>`
+
+
+
+#### Example of using a custom template (assuming PHP 5.3+) for a specific widget. Assuming the widget's name (which you can get from the actual widget in the sidebar) is custom_widget-3:
+
+`<?php
+    add_filter( 'cw_custom_widget-3_template', function( $template ){
+        $template_dir = get_template_directory();
+        return $template_dir . '/views/cw3.php';
     });
 ?>`
 
@@ -57,11 +68,16 @@ Add a "views" directory and file named "custom-cw.php" to your template director
 
 Are you using WordPress 3.6+?
 
-== Screenshots ==
-
-1. Screenshot of widget
 
 == Changelog ==
 
-= 0.5 =
+= 0.1.2 =
+* Incremental bugfixes
+
+
+= 0.1.1 =
+* Incremental bugfixes
+
+
+= 0.1.0 =
 * Initial release

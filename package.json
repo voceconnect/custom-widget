@@ -1,7 +1,7 @@
 {
   "name": "custom-widget",
-  "description": "Customize Widgets!",
-  "version": "0.1.1",
+  "description": "Customized widget that has inputs for a title, a CTA text and link, textarea and image with a template that can easily be customized using filters.",
+  "version": "0.1.2",
   "homepage": "https://github.com/voceconnect/custom-widget",
   "author": {
     "name": "Mat Gargano <mat@voceconnect.com>"
