@@ -93,7 +93,8 @@ class Custom_Widget extends WP_Widget {
 	$attachment_id = isset( $instance['attachment_id'] ) ? absint( $instance['attachment_id'] ) : '';
 	$image = '<img>';
 	if ( $attachment_id ) {
-	    $image = '<img src="' . wp_get_attachment_image_src( $attachment_id, 'full' )[0] . '">';
+	    $image_array = wp_get_attachment_image_src( $attachment_id, 'full' );
+	    $image = '<img src="' . $image_array[0] . '">';
 	}
 	?>
 	<div class="cw-form">
