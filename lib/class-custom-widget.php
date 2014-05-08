@@ -39,7 +39,6 @@ class Custom_Widget extends WP_Widget {
     public function widget( $args, $instance ) {
 	$template_file = plugin_dir_path( dirname( __FILE__ ) ) . 'views/widget.php';
 	$template_file = apply_filters( 'cw_template', $template_file );
-	$template_file = apply_filters( 'cw_' . $this->id . '_template', $template_file );
 	$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 	$cta_url = esc_url( $instance['cta_url'] );
 	$cta_text = $instance['cta_text'];
