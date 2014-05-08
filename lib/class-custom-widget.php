@@ -10,10 +10,18 @@ class Custom_Widget extends WP_Widget {
      * Initialization method
      */
     public static function init() {
-	add_action( 'widgets_init', create_function( '', 'register_widget( "Custom_Widget" );' ) );
+	add_action( 'widgets_init', array( __CLASS__, 'register_widget' ) );
 	add_action( 'admin_print_scripts-widgets.php', array( __CLASS__, 'enqueue' ) );
     }
 
+    
+    /**
+     * Register the widget
+     */
+    public static function register_widget(){
+	register_widget( "Custom_Widget" );
+    }
+    
     /**
      * Register widget with WordPress.
      */
