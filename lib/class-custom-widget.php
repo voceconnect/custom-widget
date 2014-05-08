@@ -82,7 +82,7 @@ class Custom_Widget extends WP_Widget {
      * @param array $instance Previously saved values from database.
      */
     public function form( $instance ) {
-	$attachment_id = $instance['attachment_id'] ? absint( $instance['attachment_id'] ) : '';
+	$attachment_id = isset( $instance['attachment_id'] ) ? absint( $instance['attachment_id'] ) : '';
 	$image = '<img>';
 	if ( $attachment_id ) {
 	    $image = '<img src="' . wp_get_attachment_image_src( $attachment_id, 'full' )[0] . '">';
@@ -99,7 +99,7 @@ class Custom_Widget extends WP_Widget {
 	    </p>
 	    <p>
 		<label for="<?php echo $this->get_field_id( 'cta_url' ); ?>"><?php _e( 'CTA URL:', self::$text_domain ); ?></label> 
-		<input class="widefat" id="<?php echo $this->get_field_id( 'cta_url' ); ?>" name="<?php echo $this->get_field_name( 'cta_url' ); ?>" type="text" value="<?php echo isset( $instance['cta_url'] ) ? esc_url( $cta_url ) : ''; ?>" />
+		<input class="widefat" id="<?php echo $this->get_field_id( 'cta_url' ); ?>" name="<?php echo $this->get_field_name( 'cta_url' ); ?>" type="text" value="<?php echo isset( $instance['cta_url'] ) ? esc_url( $instance['cta_url'] ) : ''; ?>" />
 	    </p>                
 	    <p>
 		<label for="<?php echo $this->get_field_id( 'text' ); ?>"><?php _e( 'Text:', self::$text_domain ); ?></label> 
