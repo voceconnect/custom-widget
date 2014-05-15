@@ -3,7 +3,7 @@
 class Custom_Widget extends WP_Widget {
 
     protected static $text_domain = 'custom_widget';
-    protected static $ver = '0.1.2'; //for cache busting
+    protected static $ver = '0.1.3'; //for cache busting
     protected static $transient_limit = 60;
 
     /**
