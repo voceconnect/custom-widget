@@ -52,11 +52,13 @@ class Custom_Widget extends WP_Widget {
 	$cta_text = $instance['cta_text'];
 	$attachment_id = $instance['attachment_id'];
 	$text = $instance['text'];
-	?>
-	<?php echo $args['before_widget']; ?>
-	<?php include( $template_file ); ?>
-	<?php echo $args['$after_widget']; ?>
-	<?php
+	if ( isset( $args['before_widget'] ) ) {
+		echo $args['before_widget']; 
+	}
+	include( $template_file );
+	if ( isset( $args['after_widget'] ) ) {
+		echo $args['after_widget']; 
+	}
     }
 
     /**
