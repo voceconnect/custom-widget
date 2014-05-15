@@ -53,9 +53,9 @@ class Custom_Widget extends WP_Widget {
 	$attachment_id = $instance['attachment_id'];
 	$text = $instance['text'];
 	?>
-	<?php echo $before_widget; ?>
+	<?php echo $args['before_widget']; ?>
 	<?php include( $template_file ); ?>
-	<?php echo $after_widget; ?>
+	<?php echo $args['$after_widget']; ?>
 	<?php
     }
 
