@@ -2,9 +2,9 @@ Custom Widget
 ===================
 Contributors: matstars, voceplatforms  
 Tags: post, widget  
-Tested up to: 3.8.1  
+Tested up to: 3.9.1  
 Requires at least: 3.6  
-Stable tag: 0.1.2  
+Stable tag: 0.1.3  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
   
@@ -47,20 +47,11 @@ Add a template directory and file named "custom-cw.php" to your template directo
 ?>
 ```
 
-#### Example of using a custom template (assuming PHP 5.3+) for a specific widget. Assuming the widget's name (which you can get from the actual widget in the sidebar) is custom_widget-3:
-
-```php
-<?php
-
-add_filter( 'cw_custom_widget-3_template', function ( $template ){
-        $template_dir = get_template_directory();
-        return $template_dir . '/views/cw3.php';    
-    } );
-?>
-
-```
 
 ## Changelog
+
+**0.1.3**
+* Bugfixes, sanitization and escaping all the things
 
 **0.1.2**
 * Incremental bugfixes
