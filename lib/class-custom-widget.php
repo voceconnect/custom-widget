@@ -14,14 +14,13 @@ class Custom_Widget extends WP_Widget {
 	add_action( 'admin_print_scripts-widgets.php', array( __CLASS__, 'enqueue' ) );
     }
 
-    
     /**
      * Register the widget
      */
-    public static function register_widget(){
+    public static function register_widget() {
 	register_widget( "Custom_Widget" );
     }
-    
+
     /**
      * Register widget with WordPress.
      */
@@ -53,11 +52,11 @@ class Custom_Widget extends WP_Widget {
 	$attachment_id = $instance['attachment_id'];
 	$text = $instance['text'];
 	if ( isset( $args['before_widget'] ) ) {
-		echo $args['before_widget']; 
+	    echo $args['before_widget'];
 	}
 	include( $template_file );
 	if ( isset( $args['after_widget'] ) ) {
-		echo $args['after_widget']; 
+	    echo $args['after_widget'];
 	}
     }
 
