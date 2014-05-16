@@ -36,7 +36,6 @@ class Custom_Widget extends WP_Widget {
      * Front-end display of widget.
      *
      * Filter 'cw_template' - template allowing a theme to use its own template file
-     * Filter 'cw_{widget_id}_template' - template allowing a theme to use its own template file
      *
      * @see WP_Widget::widget()
      *
