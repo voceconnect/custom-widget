@@ -1,11 +1,11 @@
 === Custom Widget ===
-Contributors: matstars, voceplatforms  
-Tags: post, widget  
+Contributors: matstars, voceplatforms
+Tags: post, widget
 Tested up to: 3.9.1
-Requires at least: 3.6  
-Stable tag: 0.1.4
-License: GPLv2 or later  
-License URI: http://www.gnu.org/licenses/gpl-2.0.html  
+Requires at least: 3.6
+Stable tag: 0.1.5
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Customized widget that has inputs for a title, a CTA text and link, textarea and image.
 
