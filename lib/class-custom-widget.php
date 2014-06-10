@@ -91,28 +91,28 @@ class Custom_Widget extends WP_Widget {
 	$image = '<img>';
 	if ( $attachment_id ) {
 	    $image_array = wp_get_attachment_image_src( $attachment_id, 'full' );
-	    $image = '<img src="' . $image_array[0] . '">';
+	    $image = '<img src="' . esc_attr( $image_array[0] ) . '">';
 	}
 	?>
 	<div class="cw-form">
 	    <p>
-		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', self::$text_domain ); ?></label> 
-		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo isset( $instance['title'] ) ? esc_attr( $instance['title'] ) : ''; ?>" />
+		<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', self::$text_domain ); ?></label> 
+		<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo isset( $instance['title'] ) ? esc_attr( $instance['title'] ) : ''; ?>" />
 	    </p>
 	    <p>
-		<label for="<?php echo $this->get_field_id( 'cta_text' ); ?>"><?php _e( 'CTA Text:', self::$text_domain ); ?></label> 
-		<input class="widefat" id="<?php echo $this->get_field_id( 'cta_text' ); ?>" name="<?php echo $this->get_field_name( 'cta_text' ); ?>" type="text" value="<?php echo isset( $instance['cta_text'] ) ? esc_attr( $instance['cta_text'] ) : ''; ?>" />
+		<label for="<?php echo esc_attr( $this->get_field_id( 'cta_text' ) ); ?>"><?php esc_html_e( 'CTA Text:', self::$text_domain ); ?></label> 
+		<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'cta_text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'cta_text' ) ); ?>" type="text" value="<?php echo isset( $instance['cta_text'] ) ? esc_attr( $instance['cta_text'] ) : ''; ?>" />
 	    </p>
 	    <p>
-		<label for="<?php echo $this->get_field_id( 'cta_url' ); ?>"><?php _e( 'CTA URL:', self::$text_domain ); ?></label> 
-		<input class="widefat" id="<?php echo $this->get_field_id( 'cta_url' ); ?>" name="<?php echo $this->get_field_name( 'cta_url' ); ?>" type="text" value="<?php echo isset( $instance['cta_url'] ) ? esc_url( $instance['cta_url'] ) : ''; ?>" />
-	    </p>                
+		<label for="<?php echo esc_attr( $this->get_field_id( 'cta_url' ) ); ?>"><?php esc_html_e( 'CTA URL:', self::$text_domain ); ?></label> 
+		<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'cta_url' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'cta_url' ) ); ?>" type="text" value="<?php echo isset( $instance['cta_url'] ) ? esc_url( $instance['cta_url'] ) : ''; ?>" />
+	    </p>
 	    <p>
-		<label for="<?php echo $this->get_field_id( 'text' ); ?>"><?php _e( 'Text:', self::$text_domain ); ?></label> 
-		<textarea class="widefat" id="<?php echo $this->get_field_id( 'text' ); ?>" name="<?php echo $this->get_field_name( 'text' ); ?>" type="text"><?php echo isset( $instance['text'] ) ? esc_attr( $instance['text'] ) : ''; ?></textarea>
+		<label for="<?php echo esc_attr( $this->get_field_id( 'text' ) ); ?>"><?php esc_html_e( 'Text:', self::$text_domain ); ?></label> 
+		<textarea class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'text' ) ); ?>" type="text"><?php echo isset( $instance['text'] ) ? esc_attr( $instance['text'] ) : ''; ?></textarea>
 	    </p>                                
 	    <div class="image-preview"><?php echo $image; ?></div>
-	    <input class="cw-image" id="<?php echo $this->get_field_id( 'attachment_id' ); ?>" name="<?php echo $this->get_field_name( 'attachment_id' ); ?>" type="hidden" value="<?php echo $attachment_id; ?>" />
+	    <input class="cw-image" id="<?php echo esc_attr( $this->get_field_id( 'attachment_id' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'attachment_id' ) ); ?>" type="hidden" value="<?php echo esc_attr( $attachment_id; )?>" />
 	    <p>
 		<span data-uploader-button-text="Attach to this widget" data-uploader-title="Select the image for the custom widget" class="button-secondary cw-attach-image">Attach image</span>
 	    </p>
