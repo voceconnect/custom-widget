@@ -112,7 +112,7 @@ class Custom_Widget extends WP_Widget {
 		<textarea class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'text' ) ); ?>" type="text"><?php echo isset( $instance['text'] ) ? esc_attr( $instance['text'] ) : ''; ?></textarea>
 	    </p>                                
 	    <div class="image-preview"><?php echo $image; ?></div>
-	    <input class="cw-image" id="<?php echo esc_attr( $this->get_field_id( 'attachment_id' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'attachment_id' ) ); ?>" type="hidden" value="<?php echo esc_attr( $attachment_id; )?>" />
+	    <input class="cw-image" id="<?php echo esc_attr( $this->get_field_id( 'attachment_id' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'attachment_id' ) ); ?>" type="hidden" value="<?php echo esc_attr( $attachment_id ); ?>" />
 	    <p>
 		<span data-uploader-button-text="Attach to this widget" data-uploader-title="Select the image for the custom widget" class="button-secondary cw-attach-image">Attach image</span>
 	    </p>
