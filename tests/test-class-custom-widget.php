@@ -1,0 +1,178 @@
+<?php
+
+/**
+ * Tests to test that that testing framework is testing tests. Meta, huh?
+ *
+ * @package wordpress-plugins-tests
+ */
+class Test_Custom_Widget extends Voce_WP_UnitTestCase {
+
+    /**
+     * If these tests are being run on Travis CI, verify that the version of
+     * WordPress installed is the version that we requested.
+     *
+     * @requires PHP 5.3
+     */
+    function test_wp_version() {
+
+        if ( ! getenv( 'TRAVIS' ) ) {
+            $this->markTestSkipped( 'Test skipped since Travis CI was not detected.' );
+        }
+
+        $requested_version = getenv( 'WP_VERSION' );
+
+        // The "latest" version requires special handling.
+        if ( 'latest' === $requested_version ) {
+
+            $file = file_get_contents( ABSPATH . WPINC . '/version.php' );
+            preg_match( '#\$wp_version = \'([^\']+)\';#', $file, $matches );
+            $requested_version = $matches[1];
+
+        }
+
+        $this->assertEquals( get_bloginfo( 'version' ), $requested_version );
+
+    }
+
+    /**
+     * Ensure that the plugin has been installed and activated.
+     */
+    function test_plugin_activated() {
+
+        $this->assertTrue( is_plugin_active( 'custom-widget/custom-widget.php' ) );
+
+    }
+
+    function provider_test_init() {
+
+        return array(
+            array( 'widgets_init', 'register_widget' ),
+            array( 'admin_print_scripts-widgets.php', 'enqueue' )
+        );
+    }
+
+    /**
+     * @dataProvider provider_test_init
+     */
+    function test_init( $hook, $function, $expected = 10 ) {
+
+        $custom_widget = new Custom_Widget;
+        $custom_widget->init();
+        $actual = has_action( $hook, array( $custom_widget, $function ) );
+        $this->assertEquals( $actual, $expected );
+
+    }
+
+    function test_register_widget(){
+        $custom_widget = new Custom_Widget;
+        $custom_widget->register_widget();
+        $widgets = array_keys( $GLOBALS['wp_widget_factory']->widgets );
+
+        $this->assertContains( 'Custom_Widget', $widgets );
+
+    }
+
+    function test_widget(){
+
+        $args = array('before_title' => 'foo');
+        $cta_text = 'call to action text';
+        $cta_url = 'http://google.com';
+        $instance = array(
+
+            'title' => 'title',
+            'cta_url' => $cta_url,
+            'cta_text' => $cta_text,
+            'attachment_id' => 'attachment_id',
+            'text' => 'this is text'
+
+        );
+
+        $custom_widget = new Custom_Widget;
+        ob_start();
+        $custom_widget->widget( $args, $instance );
+        $output = ob_get_clean();
+        $this->assertTag(
+            array(
+                'tag' => 'a',
+                'content' => $cta_text,
+                'attributes' => array('href' => $cta_url)
+            ), $output );
+
+
+    }
+
+
+    function provider_test_update(){
+
+        return array(
+
+            array(
+                array(
+
+                    'title' => 'foo',
+                    'cta_url' => 'google.com',
+                    'cta_text' => 'bar',
+                    'text' => 'fozbar',
+                    'attachment_id' => 'bar'
+
+                ),
+
+                array(
+
+                    'title' => 'foo',
+                    'cta_url' => 'http://google.com',
+                    'cta_text' => 'bar',
+                    'text' => 'fozbar',
+                    'attachment_id' => 0
+
+                )
+
+            ),
+
+            array(
+                array(
+
+                    'title' => 'bazbar<scary style="muhahaha" href="http://evil.com">foo</scary>',
+                    'cta_url' => 'http://yahoo.com',
+                    'cta_text' => 'bar<removethis></removethis>',
+                    'text' => 'fozbar<iamevil>bar</iamevil>',
+                    'attachment_id' => 123
+
+                ),
+
+                array(
+
+                    'title' => 'bazbarfoo',
+                    'cta_url' => 'http://yahoo.com',
+                    'cta_text' => 'bar',
+                    'text' => 'fozbarbar',
+                    'attachment_id' => 123
+
+                )
+
+            ),
+
+
+
+        );
+
+
+    }
+
+
+    /**
+     * @dataProvider provider_test_update
+     */
+    function test_update( $new_instance, $expected ){
+
+
+        global $allowedposttags;
+
+        $custom_widget = new Custom_Widget;
+        $actual = $custom_widget->update( $new_instance, 'foo' );
+        $this->assertEquals( $expected, $actual );
+
+    }
+
+
+}

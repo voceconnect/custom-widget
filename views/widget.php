@@ -1,6 +1,12 @@
 <?php
 if ( $title ) {
-    echo $before_title . $title . $after_title;
+    if ( isset( $before_title ) ) {
+        echo $before_title;
+    }
+    echo $title;
+    if ( isset( $after_title ) ) {
+        echo $after_title;
+    }
 }
 ?>
 <ul>
