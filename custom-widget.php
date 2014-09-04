@@ -9,4 +9,5 @@
  */
 
 require_once('lib/class-custom-widget.php');
-new Custom_Widget;
+$custom_widget = new Custom_Widget;
+$custom_widget->init();

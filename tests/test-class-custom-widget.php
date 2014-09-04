@@ -52,6 +52,7 @@ class Test_Custom_Widget extends Voce_WP_UnitTestCase {
     }
 
     /**
+     * @covers Custom_Widget::init
      * @dataProvider provider_test_init
      */
     function test_init( $hook, $function, $expected = 10 ) {
@@ -63,6 +64,9 @@ class Test_Custom_Widget extends Voce_WP_UnitTestCase {
 
     }
 
+    /**
+     * @covers Custom_Widget::register_widget
+     */
     function test_register_widget(){
         $custom_widget = new Custom_Widget;
         $custom_widget->register_widget();
@@ -72,9 +76,12 @@ class Test_Custom_Widget extends Voce_WP_UnitTestCase {
 
     }
 
+    /**
+     * @covers Custom_Widget::widget
+     */
     function test_widget(){
 
-        $args = array('before_title' => 'foo');
+        $args = array('before_title' => 'foo', 'before_widget' => 'bar', 'after_widget'=> 'baz' );
         $cta_text = 'call to action text';
         $cta_url = 'http://google.com';
         $instance = array(
@@ -100,7 +107,6 @@ class Test_Custom_Widget extends Voce_WP_UnitTestCase {
 
 
     }
-
 
     function provider_test_update(){
 
@@ -161,16 +167,93 @@ class Test_Custom_Widget extends Voce_WP_UnitTestCase {
 
 
     /**
+     * @covers Custom_Widget::update
      * @dataProvider provider_test_update
      */
     function test_update( $new_instance, $expected ){
 
-
-        global $allowedposttags;
-
         $custom_widget = new Custom_Widget;
         $actual = $custom_widget->update( $new_instance, 'foo' );
         $this->assertEquals( $expected, $actual );
+
+    }
+
+    function provider_test_form(){
+
+        return array(
+
+            array( array( 'attachment_id' => 123 ), array( 'foo' ), 1 )
+
+        );
+
+    }
+
+
+    /**
+     * @covers Custom_Widget::form
+     * @dataProvider provider_test_form
+     */
+    function test_form( $instance, $image_array, $wp_get_attachment_image_src_expects ){
+
+
+
+        $custom_widget = $this->getMock( 'Custom_Widget', array( 'get_field_id', 'get_field_name', 'wp_get_attachment_image_src' ) );
+
+        $custom_widget->expects( $this->exactly( $wp_get_attachment_image_src_expects ) )
+            ->method( 'wp_get_attachment_image_src' )
+            ->will ( $this->returnValue( $image_array ) );
+
+        $custom_widget->expects( $this->exactly( 9 ) )
+            ->method( 'get_field_id' );
+
+        $custom_widget->expects( $this->exactly( 5 ) )
+            ->method( 'get_field_name' );
+
+        ob_start();
+
+        $custom_widget->form( $instance );
+
+        $output = ob_get_clean();
+
+
+
+
+        $this->assertTag(
+            array(
+                'tag' => 'div',
+                'children' => array(
+                    'count' => 1
+                ),
+                'child' => array(
+                    'tag' => 'img',
+                    'attributes' => array(
+                        'src' => $image_array[0]
+                    )
+                ),
+                'attributes' =>
+                    array(
+                        'class' => 'image-preview'
+                    )
+            ), $output );
+
+
+
+    }
+
+    /**
+     * @covers Custom_Widget::enqueue
+     */
+
+    function test_enqueue(){
+
+        // set to an admin screen
+
+        set_current_screen( 'post-new.php' );
+        $custom_widget = new Custom_Widget;
+        $custom_widget->enqueue();
+        $this->assertTrue( wp_script_is( 'cw-admin' ) );
+        $this->assertTrue( wp_style_is( 'cw-admin' ) );
+
 
     }
 

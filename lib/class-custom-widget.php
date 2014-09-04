@@ -7,6 +7,19 @@ class Custom_Widget extends WP_Widget {
     protected static $transient_limit = 60;
 
     /**
+     * @codeCoverageIgnore
+     * Register widget with WordPress.
+     */
+    public function __construct() {
+        parent::__construct(
+            'custom_widget', // Base ID
+            'Custom Widget', // Name
+            array( 'description' => __( 'Customized widget allowing you to output a title, text, link and image.', self::$text_domain ), ) // Args
+        );
+    }
+
+
+    /**
      * Initialization method
      */
     public function init() {
@@ -19,17 +32,6 @@ class Custom_Widget extends WP_Widget {
      */
     public function register_widget() {
         register_widget( "Custom_Widget" );
-    }
-
-    /**
-     * Register widget with WordPress.
-     */
-    public function __construct() {
-        parent::__construct(
-            'custom_widget', // Base ID
-            'Custom Widget', // Name
-            array( 'description' => __( 'Customized widget allowing you to output a title, text, link and image.', self::$text_domain ), ) // Args
-        );
     }
 
     /**
@@ -88,10 +90,11 @@ class Custom_Widget extends WP_Widget {
      * @param array $instance Previously saved values from database.
      */
     public function form( $instance ) {
-        $attachment_id = isset( $instance['attachment_id'] ) ? absint( $instance['attachment_id'] ) : '';
+
+        $attachment_id = isset( $instance['attachment_id'] ) ? absint( $instance['attachment_id'] ) : false;
         $image         = '<img>';
         if ( $attachment_id ) {
-            $image_array = wp_get_attachment_image_src( $attachment_id, 'full' );
+            $image_array = $this->wp_get_attachment_image_src( $attachment_id, 'full' );
             $image       = '<img src="' . esc_attr( $image_array[0] ) . '">';
         }
         ?>
@@ -123,7 +126,21 @@ class Custom_Widget extends WP_Widget {
                 <span data-uploader-button-text="Attach to this widget" data-uploader-title="Select the image for the custom widget" class="button-secondary cw-attach-image">Attach image</span>
             </p>
         </div>
+
     <?php
+    }
+
+    /**
+     * Helper method to assist testing
+     * @codeCoverageIgnore
+     * @param $attachment_id
+     * @param $size
+     * @param $icon
+     */
+    public function wp_get_attachment_image_src( $attachment_id, $size='thumbnail', $icon = false ){
+
+        return wp_get_attachment_image_src( $attachment_id, $size, $icon );
+
     }
 
     /**
