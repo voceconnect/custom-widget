@@ -98,12 +98,19 @@ class Test_Custom_Widget extends Voce_WP_UnitTestCase {
         ob_start();
         $custom_widget->widget( $args, $instance );
         $output = ob_get_clean();
-        $this->assertTag(
-            array(
-                'tag' => 'a',
-                'content' => $cta_text,
-                'attributes' => array('href' => $cta_url)
-            ), $output );
+
+		$document = new DOMDocument;
+		$document->preserveWhiteSpace = false;
+		$document->loadHTML( $output );
+		$xpath = new DOMXPath ( $document );
+		$anchor_tag = $xpath->query("//a[@href='" . $cta_url . "']");
+
+		$contents = $anchor_tag->item(0)->nodeValue;
+
+		$this->assertEquals( $contents, $cta_text );
+		$this->assertEquals( 1, $anchor_tag->length );
+
+
 
 
     }
@@ -203,39 +210,39 @@ class Test_Custom_Widget extends Voce_WP_UnitTestCase {
             ->method( 'wp_get_attachment_image_src' )
             ->will ( $this->returnValue( $image_array ) );
 
-        $custom_widget->expects( $this->exactly( 9 ) )
-            ->method( 'get_field_id' );
+		/*
+		 * DOMDocument::loadHTML() returns an error if HTML is not valid (e.g. two ids with same value), let's have the
+		 * Mocked methods Custom_Widget::get_field_id() and Custom_Widget::get_field_name() return what is passed to
+		 * them to preserve the HTML's validity
+		 */
 
-        $custom_widget->expects( $this->exactly( 5 ) )
-            ->method( 'get_field_name' );
+
+        $custom_widget->expects( $this->exactly( 9 ) )
+            ->method( 'get_field_id' )
+			->will( $this->returnCallback( function(){
+				$args = func_get_args();
+				return $args[0];
+			}));
+
+
+
+        $custom_widget->expects( $this->at( 0 ) )
+            ->method( 'get_field_name' )
+			->will( $this->returnCallback( function($x){
+				$args = func_get_args();
+				return $args[0];
+			}));
 
         ob_start();
 
         $custom_widget->form( $instance );
-
         $output = ob_get_clean();
-
-
-
-
-        $this->assertTag(
-            array(
-                'tag' => 'div',
-                'children' => array(
-                    'count' => 1
-                ),
-                'child' => array(
-                    'tag' => 'img',
-                    'attributes' => array(
-                        'src' => $image_array[0]
-                    )
-                ),
-                'attributes' =>
-                    array(
-                        'class' => 'image-preview'
-                    )
-            ), $output );
-
+		$document = new DOMDocument;
+		$document->preserveWhiteSpace = false;
+		$document->loadHTML( $output );
+		$xpath = new DOMXPath ( $document );
+		$img_tag = $xpath->query("//img[@src='" . $image_array[0] . "']");
+		$this->assertEquals( 1, $img_tag->length );
 
 
     }
